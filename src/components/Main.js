@@ -1,10 +1,22 @@
 import React from 'react';
+import { api } from '../utils/Api';
  
  function Main(props) {
 
-  const [userName, setUserName] = React.useState()
-  const [userDescription, setUserDescription] = 
-  const [userAvatar, setUserAvatar] = 
+  const [userName, setUserName] = React.useState();
+  const [userDescription, setUserDescription] = React.useState();
+  const [userAvatar, setUserAvatar] = React.useState();
+  const [cards, setCards] = React.useState();
+
+  React.useEffect( () => {
+    api.getProfileInformation()
+    .then((data) => {
+        setUserName(data.name);
+        setUserDescription(data.about);
+        setUserAvatar(data.avatar);
+    })
+      .catch((err) => console.log(err));
+  } )
 
 return(
   <main>
@@ -18,13 +30,14 @@ return(
           >
             <img
               className="profile__image"
-              src="<%=require('./images/image.jpg')%>"
+              //src="<%=require('./images/image.jpg')%>"
+              src = {userAvatar}
               alt="Фотография пользователя в профиле"
             />
           </button>
           <div className="profile__info">
-            <div className="profile__name">
-              <h1 className="profile__title" />
+            <div className="profile__name"> 
+              <h1 className="profile__title">{userName}</h1>
               <button
                 className="profile__edit-button"
                 type="button"
@@ -32,7 +45,7 @@ return(
                 onClick={props.onEditProfile}
               ></button>
             </div>
-            <p className="profile__hobby" />
+            <p className="profile__hobby">{userDescription}</p>
           </div>
         </div>
         <button
