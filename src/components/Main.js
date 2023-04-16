@@ -2,7 +2,9 @@ import React from 'react';
  
  function Main(props) {
 
-  
+  const [userName, setUserName] = React.useState()
+  const [userDescription, setUserDescription] = 
+  const [userAvatar, setUserAvatar] = 
 
 return(
   <main>

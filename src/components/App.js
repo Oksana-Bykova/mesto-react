@@ -7,22 +7,35 @@ import Main from "./Main.js";
 import Footer from "./Footer.js";
 import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.jsx";
+import { api } from "../utils/Api.js";
 
 function App() {
 
+
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+
+
+
   function handleEditAvatarClick() {
-    document.querySelector('.popup_intended_edit-photo').classList.add("popup_opened");
+    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
   };
 
   function handleEditProfileClick() {
-    document.querySelector('.popup_intended_edit-profile').classList.add("popup_opened");
+    setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
+    console.log(setIsEditProfilePopupOpen)
   };
 
   function handleAddPlaceClick() {
-    document.querySelector('.popup_intended_add-card').classList.add("popup_opened");
+    setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
   }
 
-
+function closeAllPopups() {
+  setIsEditAvatarPopupOpen(false);
+  setIsEditProfilePopupOpen(false);
+  setIsAddPlacePopupOpen(false);
+}
 
 
 
@@ -40,7 +53,8 @@ function App() {
           <Footer />
         </div>
         //Попап редактирования информации
-        <PopupWithForm name="edit-profile" title="Редактировать профиль">
+        <PopupWithForm name="edit-profile" title="Редактировать профиль" isOpen ={isEditProfilePopupOpen} onClose ={ closeAllPopups}>
+          
           <input
             type="text"
             className="popup__input  popup__input_type_name"
@@ -63,7 +77,7 @@ function App() {
           <span className="popup__error" id="hobby-error" />
         </PopupWithForm>
         //Попап добавления новой карточки
-        <PopupWithForm name="add-card" title="Новое место">
+        <PopupWithForm name="add-card" title="Новое место" isOpen ={isAddPlacePopupOpen} onClose ={ closeAllPopups}>
           <input
             type="text"
             className="popup__input  popup__input_type_title"
@@ -88,7 +102,7 @@ function App() {
         //Попап подтверждения удаления карточки
         <PopupWithForm name="delete-card" title="Вы уверены?"></PopupWithForm>
         //Попап обновления фотографии в профиле
-        <PopupWithForm name="edit-photo" title="Обновить аватар">
+        <PopupWithForm name="edit-photo" title="Обновить аватар" isOpen = {isEditAvatarPopupOpen} onClose ={ closeAllPopups}>
           <input
             type="url"
             className="popup__input"
