@@ -1,25 +1,33 @@
-import React from 'react';
-import { api } from '../utils/Api';
- 
- function Main(props) {
+import React from "react";
+import { api } from "../utils/Api";
+import { Card } from "./Card.js";
 
+function Main(props) {
   const [userName, setUserName] = React.useState();
   const [userDescription, setUserDescription] = React.useState();
   const [userAvatar, setUserAvatar] = React.useState();
-  const [cards, setCards] = React.useState();
+  const [cards, setCards] = React.useState([]);
 
-  React.useEffect( () => {
-    api.getProfileInformation()
-    .then((data) => {
+  React.useEffect(() => {
+    api
+      .getProfileInformation()
+      .then((data) => {
         setUserName(data.name);
         setUserDescription(data.about);
         setUserAvatar(data.avatar);
-    })
+      })
       .catch((err) => console.log(err));
-  } )
 
-return(
-  <main>
+    api
+      .getInitialCards()
+      .then((data) => {
+        setCards(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  return (
+    <main>
       <section className="profile root__section">
         <div className="profile__container">
           <button
@@ -31,12 +39,12 @@ return(
             <img
               className="profile__image"
               //src="<%=require('./images/image.jpg')%>"
-              src = {userAvatar}
+              src={userAvatar}
               alt="Фотография пользователя в профиле"
             />
           </button>
           <div className="profile__info">
-            <div className="profile__name"> 
+            <div className="profile__name">
               <h1 className="profile__title">{userName}</h1>
               <button
                 className="profile__edit-button"
@@ -56,11 +64,14 @@ return(
         ></button>
       </section>
       <section className="group">
-        <ul className="group__ul"></ul>
+        <ul className="group__ul">
+          {cards.map((item) => (
+            <Card key={item._id} name = {item.name} likes = {item.likes.length}  link = {item.link}/>
+          ))}
+        </ul>
       </section>
     </main>
-)
+  );
+}
 
- }
-
- export default Main;
+export default Main;

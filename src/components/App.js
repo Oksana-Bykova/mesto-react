@@ -7,39 +7,37 @@ import Main from "./Main.js";
 import Footer from "./Footer.js";
 import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.jsx";
-import { api } from "../utils/Api.js";
+//import { api } from "../utils/Api.js";
 
 function App() {
-
-
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  //стейт переменные для открытия попапов, когда в них попадает тру(при нажатии на кнопку открытия попапа в компоненте Main - состояние isOpen тоже менятся на тру и попапу присваивается класс popup_opened)
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
+    React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
+    React.useState(false);
 
-
+    //стейт переменная для полноразмерной картинки при клике 
+  const [selectedCard, setSelectedCard] = React.useState();
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
-  };
+  }
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
-    console.log(setIsEditProfilePopupOpen)
-  };
+    console.log(setIsEditProfilePopupOpen);
+  }
 
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
   }
 
-function closeAllPopups() {
-  setIsEditAvatarPopupOpen(false);
-  setIsEditProfilePopupOpen(false);
-  setIsAddPlacePopupOpen(false);
-}
-
-
-
-
+  function closeAllPopups() {
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+  }
 
   return (
     <>
@@ -49,12 +47,20 @@ function closeAllPopups() {
       <div className="root">
         <div className="page">
           <Header />
-          <Main onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick}  onAddPlace = {handleAddPlaceClick} />
+          <Main
+            onEditAvatar={handleEditAvatarClick}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+          />
           <Footer />
         </div>
         //Попап редактирования информации
-        <PopupWithForm name="edit-profile" title="Редактировать профиль" isOpen ={isEditProfilePopupOpen} onClose ={ closeAllPopups}>
-          
+        <PopupWithForm
+          name="edit-profile"
+          title="Редактировать профиль"
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+        >
           <input
             type="text"
             className="popup__input  popup__input_type_name"
@@ -77,7 +83,12 @@ function closeAllPopups() {
           <span className="popup__error" id="hobby-error" />
         </PopupWithForm>
         //Попап добавления новой карточки
-        <PopupWithForm name="add-card" title="Новое место" isOpen ={isAddPlacePopupOpen} onClose ={ closeAllPopups}>
+        <PopupWithForm
+          name="add-card"
+          title="Новое место"
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+        >
           <input
             type="text"
             className="popup__input  popup__input_type_title"
@@ -102,7 +113,12 @@ function closeAllPopups() {
         //Попап подтверждения удаления карточки
         <PopupWithForm name="delete-card" title="Вы уверены?"></PopupWithForm>
         //Попап обновления фотографии в профиле
-        <PopupWithForm name="edit-photo" title="Обновить аватар" isOpen = {isEditAvatarPopupOpen} onClose ={ closeAllPopups}>
+        <PopupWithForm
+          name="edit-photo"
+          title="Обновить аватар"
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+        >
           <input
             type="url"
             className="popup__input"
@@ -113,13 +129,8 @@ function closeAllPopups() {
           />
           <span className="popup__error" id="link-photo-error" />
         </PopupWithForm>
-
         <ImagePopup />
-
-
-        </div>
-
-      <template className="card-form" />
+      </div>
     </>
   );
 }
