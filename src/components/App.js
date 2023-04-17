@@ -56,7 +56,7 @@ function App() {
           />
           <Footer />
         </div>
-        //Попап редактирования информации
+        {/*Попап редактирования информации*/}
         <PopupWithForm
           name="edit-profile"
           title="Редактировать профиль"
@@ -84,7 +84,7 @@ function App() {
           />
           <span className="popup__error" id="hobby-error" />
         </PopupWithForm>
-        //Попап добавления новой карточки
+        {/*Попап добавления новой карточки*/}
         <PopupWithForm
           name="add-card"
           title="Новое место"
@@ -113,9 +113,9 @@ function App() {
           />
           <span className="popup__error" id="link-error" />
         </PopupWithForm>
-        //Попап подтверждения удаления карточки
+        {/*Попап подтверждения удаления карточки*/}
         <PopupWithForm name="delete-card" title="Вы уверены?"></PopupWithForm>
-        //Попап обновления фотографии в профиле
+        {/*Попап обновления фотографии в профиле*/}
         <PopupWithForm
           name="edit-photo"
           title="Обновить аватар"

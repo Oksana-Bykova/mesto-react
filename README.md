@@ -8,7 +8,7 @@
 * BEM
 * Grid
 * JavaScript
-*ООП 
-*ES6 Modules
-*React
-[Ссылка на проект]
+* ООП 
+* ES6 Modules
+* React
+[Ссылка на проект](https://oksana-bykova.github.io/mesto-react/)
