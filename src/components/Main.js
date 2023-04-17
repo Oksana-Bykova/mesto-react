@@ -3,9 +3,9 @@ import { api } from "../utils/Api";
 import { Card } from "./Card.jsx";
 
 function Main(props) {
-  const [userName, setUserName] = React.useState();
-  const [userDescription, setUserDescription] = React.useState();
-  const [userAvatar, setUserAvatar] = React.useState();
+  const [userName, setUserName] = React.useState("");
+  const [userDescription, setUserDescription] = React.useState("");
+  const [userAvatar, setUserAvatar] = React.useState("");
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
@@ -38,7 +38,6 @@ function Main(props) {
           >
             <img
               className="profile__image"
-              
               src={userAvatar}
               alt="Фотография пользователя в профиле"
             />
@@ -66,14 +65,12 @@ function Main(props) {
       <section className="group">
         <ul className="group__ul">
           {cards.map((item) => (
-            <Card key={item._id} 
-            name = {item.name} 
-            likes = {item.likes.length}  
-            link = {item.link} 
-            onCardClick= {props.onCardClick}
-            card = {item}
-            hendler = {props.hendler}
-             />
+            <Card
+              key={item._id}
+              onCardClick={props.onCardClick}
+              card={item}
+              hendler={props.hendler}
+            />
           ))}
         </ul>
       </section>

@@ -17,17 +17,13 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     React.useState(false);
 
-    //стейт переменная для полноразмерной картинки при клике 
+  //стейт переменная для полноразмерной картинки при клике
   const [selectedCard, setSelectedCard] = React.useState({});
   const [isPhotoPopupOpen, setIsPhotoPopupOpen] = React.useState(false);
 
-
-  
- 
-// 3 функцйии - обработчика для событий клика на кнопки -открытия попапов
+  // 3 функцйии - обработчика для событий клика на кнопки -открытия попапов
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
-    
   }
 
   function handleAddPlaceClick() {
@@ -37,7 +33,7 @@ function App() {
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
   }
-//обработчик клика по крестику в попапе
+  //обработчик клика по крестику в попапе
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
@@ -45,13 +41,8 @@ function App() {
     setIsPhotoPopupOpen(false);
   }
 
-
-
-
   return (
     <>
-      <meta charSet="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Место</title>
       <div className="root">
         <div className="page">
@@ -60,8 +51,8 @@ function App() {
             onEditAvatar={handleEditAvatarClick}
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
-            onCardClick = {setSelectedCard}
-            hendler = {setIsPhotoPopupOpen}
+            onCardClick={setSelectedCard}
+            hendler={setIsPhotoPopupOpen}
           />
           <Footer />
         </div>
@@ -71,7 +62,6 @@ function App() {
           title="Редактировать профиль"
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
-          buttonName="Сохранить"
         >
           <input
             type="text"
@@ -131,7 +121,6 @@ function App() {
           title="Обновить аватар"
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
-          buttonName="Сохранить"
         >
           <input
             type="url"
@@ -143,11 +132,11 @@ function App() {
           />
           <span className="popup__error" id="link-photo-error" />
         </PopupWithForm>
-        <ImagePopup 
-        name ="photo-viewing"
-        card= {selectedCard}
-        isOpen = {isPhotoPopupOpen}
-        onClose={closeAllPopups}
+        <ImagePopup
+          name="photo-viewing"
+          card={selectedCard}
+          isOpen={isPhotoPopupOpen}
+          onClose={closeAllPopups}
         />
       </div>
     </>

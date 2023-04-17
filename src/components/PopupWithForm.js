@@ -18,7 +18,7 @@ return(
     <form className="popup__form" name="{props.name}" noValidate="">
      {props.children}
       <button type="submit" className="popup__button">
-        {props.buttonName}
+        {props.buttonName || 'Сохранить'}
       </button>
     </form>
   </div>
