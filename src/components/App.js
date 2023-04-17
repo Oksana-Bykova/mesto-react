@@ -18,26 +18,35 @@ function App() {
     React.useState(false);
 
     //стейт переменная для полноразмерной картинки при клике 
-  const [selectedCard, setSelectedCard] = React.useState();
+  const [selectedCard, setSelectedCard] = React.useState({});
+  const [isPhotoPopupOpen, setIsPhotoPopupOpen] = React.useState(false);
 
-  function handleEditAvatarClick() {
-    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
-  }
 
+  
+ 
+// 3 функцйии - обработчика для событий клика на кнопки -открытия попапов
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
-    console.log(setIsEditProfilePopupOpen);
+    
   }
 
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
   }
 
+  function handleEditAvatarClick() {
+    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+  }
+//обработчик клика по крестику в попапе
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setIsPhotoPopupOpen(false);
   }
+
+
+
 
   return (
     <>
@@ -51,6 +60,8 @@ function App() {
             onEditAvatar={handleEditAvatarClick}
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
+            onCardClick = {setSelectedCard}
+            hendler = {setIsPhotoPopupOpen}
           />
           <Footer />
         </div>
@@ -129,7 +140,12 @@ function App() {
           />
           <span className="popup__error" id="link-photo-error" />
         </PopupWithForm>
-        <ImagePopup />
+        <ImagePopup 
+        name ="photo-viewing"
+        card= {selectedCard}
+        isOpen = {isPhotoPopupOpen}
+        onClose={closeAllPopups}
+        />
       </div>
     </>
   );

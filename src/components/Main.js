@@ -1,6 +1,6 @@
 import React from "react";
 import { api } from "../utils/Api";
-import { Card } from "./Card.js";
+import { Card } from "./Card.jsx";
 
 function Main(props) {
   const [userName, setUserName] = React.useState();
@@ -66,7 +66,14 @@ function Main(props) {
       <section className="group">
         <ul className="group__ul">
           {cards.map((item) => (
-            <Card key={item._id} name = {item.name} likes = {item.likes.length}  link = {item.link}/>
+            <Card key={item._id} 
+            name = {item.name} 
+            likes = {item.likes.length}  
+            link = {item.link} 
+            onCardClick= {props.onCardClick}
+            card = {item}
+            hendler = {props.hendler}
+             />
           ))}
         </ul>
       </section>
