@@ -38,7 +38,7 @@ function Main(props) {
           >
             <img
               className="profile__image"
-              //src="<%=require('./images/image.jpg')%>"
+              
               src={userAvatar}
               alt="Фотография пользователя в профиле"
             />

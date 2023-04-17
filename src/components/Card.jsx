@@ -11,7 +11,8 @@ function Card(props) {
       <img
         className="group__image"
         alt="фото"
-        style={{ backgroundImage: `url(${props.link})` }}
+        //style={{ backgroundImage: `url(${props.link})` }}
+        src = {props.link}
         onClick={handleClick}
       />
       <div className="group__container">
