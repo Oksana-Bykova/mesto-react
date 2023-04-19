@@ -43,7 +43,7 @@ function App() {
 
   return (
     <>
-      <title>Место</title>
+      
       <div className="root">
         <div className="page">
           <Header />
