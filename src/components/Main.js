@@ -1,30 +1,17 @@
 import React from "react";
 import { api } from "../utils/Api";
 import { Card } from "./Card.jsx";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js"; //тут тоже нужно подключать? Почему не работает из App?- спросить у куратора
+import { useContext } from "react";
+
 
 function Main(props) {
-  const [userName, setUserName] = React.useState("");
-  const [userDescription, setUserDescription] = React.useState("");
-  const [userAvatar, setUserAvatar] = React.useState("");
-  const [cards, setCards] = React.useState([]);
+ 
+  //const [cards, setCards] = React.useState([]);
+  //подписываемся на контекст
+  const userContext = useContext(CurrentUserContext);
 
-  React.useEffect(() => {
-    api
-      .getProfileInformation()
-      .then((data) => {
-        setUserName(data.name);
-        setUserDescription(data.about);
-        setUserAvatar(data.avatar);
-      })
-      .catch((err) => console.log(err));
-
-    api
-      .getInitialCards()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+ 
 
   return (
     <main>
@@ -38,13 +25,13 @@ function Main(props) {
           >
             <img
               className="profile__image"
-              src={userAvatar}
+              src={userContext.avatar}
               alt="Фотография пользователя в профиле"
             />
           </button>
           <div className="profile__info">
             <div className="profile__name">
-              <h1 className="profile__title">{userName}</h1>
+              <h1 className="profile__title">{userContext.name}</h1>
               <button
                 className="profile__edit-button"
                 type="button"
@@ -52,7 +39,7 @@ function Main(props) {
                 onClick={props.onEditProfile}
               ></button>
             </div>
-            <p className="profile__hobby">{userDescription}</p>
+            <p className="profile__hobby">{userContext.about}</p>
           </div>
         </div>
         <button
@@ -70,6 +57,8 @@ function Main(props) {
               onCardClick={props.onCardClick}
               card={item}
               hendler={props.hendler}
+              onCardLike = {props.onCardLike}
+              onCardDelete = {props.onCardDelete}
             />
           ))}
         </ul>

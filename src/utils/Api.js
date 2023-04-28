@@ -47,6 +47,13 @@ class Api {
     }).then((res) => this._responseProcessing(res));
   }
 
+  deleteLike(id) {
+    return fetch(`${this.baseUrl}/cards/${id}/likes`, {
+      method: "DELETE",
+      headers: this.headers,
+    }).then((res) => this._responseProcessing(res));
+  }
+
   doLike(id) {
     return fetch(`${this.baseUrl}/cards/${id}/likes`, {
       method: "PUT",
@@ -54,11 +61,13 @@ class Api {
     }).then((res) => this._responseProcessing(res));
   }
 
-  deleteLike(id) {
-    return fetch(`${this.baseUrl}/cards/${id}/likes`, {
-      method: "DELETE",
-      headers: this.headers,
-    }).then((res) => this._responseProcessing(res));
+  changeLikeCardStatus(id, isLiked) {
+    if (isLiked) {
+      api.deleteLike(id); 
+      
+    } else {
+      api.doLike(id);
+    }
   }
 
   deleteCard(id) {
