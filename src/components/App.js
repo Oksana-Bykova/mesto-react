@@ -54,12 +54,8 @@ function App() {
         setCurrentUser(data);
       })
       .catch((err) => console.log(err));
-  }, []);
 
-  React.useEffect(() => {
-    
-
-    api
+      api
       .getInitialCards()
       .then((data) => {
         setCards(data);
@@ -67,12 +63,15 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(currentUser);
+  
+
+  
 
   //лайки для карточки
   function handleCardLike(card) {
     // проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((item) => item._id === currentUser._id);
+    
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.changeLikeCardStatus(card._id, !isLiked).then((data) => {
       setCards((state) => state.map((c) => (c._id === card._id ? data : c)));
@@ -90,7 +89,7 @@ function App() {
           }
         })
       );
-    });
+    })
   }
 
   return (
@@ -107,6 +106,7 @@ function App() {
               hendler={setIsPhotoPopupOpen}
               onCardLike={handleCardLike}
               onCardDelete={handleCardDelete}
+              cards = {cards}
             />
             <Footer />
           </div>

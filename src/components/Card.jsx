@@ -35,7 +35,7 @@ function Card(props) {
         <h2 className="group__title">{props.card.name}</h2>
         <div className="group__container-like">
           <button
-            onclick = {handleLikeClick}
+            onClick = {handleLikeClick}
             className= {cardLikeButtonClassName}
             type="button"
             aria-label="поставить отметку  мне нравится"
@@ -45,7 +45,7 @@ function Card(props) {
       </div>
       {isOwn && <button 
       className="group__batton-delite"
-      onclick = {handleDeleteClick}
+      onClick = {handleDeleteClick}
       />}
     </li>
   );

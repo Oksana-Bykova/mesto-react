@@ -51,7 +51,7 @@ function Main(props) {
       </section>
       <section className="group">
         <ul className="group__ul">
-          {cards.map((item) => (
+          {props.cards.map((item) => (
             <Card
               key={item._id}
               onCardClick={props.onCardClick}
