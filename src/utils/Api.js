@@ -47,27 +47,12 @@ class Api {
     }).then((res) => this._responseProcessing(res));
   }
 
-  /*deleteLike(id) {
-    return fetch(`${this.baseUrl}/cards/${id}/likes`, {
-      method: "DELETE",
-      headers: this.headers,
-    }).then((res) => this._responseProcessing(res));
-  }
-
-  doLike(id) {
-    return fetch(`${this.baseUrl}/cards/${id}/likes`, {
-      method: "PUT",
-      headers: this.headers,
-    }).then((res) => this._responseProcessing(res));
-  }*/
-
   changeLikeCardStatus(id, isLiked) {
     return fetch(`${this.baseUrl}/cards/${id}/likes`, {
       method: `${isLiked ? `PUT` : `DELETE`}`,
       headers: this.headers,
     }).then((res) => this._responseProcessing(res));
-    }
-  
+  }
 
   deleteCard(id) {
     return fetch(`${this.baseUrl}/cards/${id}`, {
@@ -86,9 +71,6 @@ class Api {
     }).then((res) => this._responseProcessing(res));
   }
 }
-
-//export { Api };
-
 
 //***********************************************************************создаем экземпляр класса Api
 const api = new Api({

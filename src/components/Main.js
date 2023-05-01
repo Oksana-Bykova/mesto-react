@@ -1,17 +1,12 @@
 import React from "react";
 import { api } from "../utils/Api";
 import { Card } from "./Card.jsx";
-import { CurrentUserContext } from "../contexts/CurrentUserContext.js"; //тут тоже нужно подключать? Почему не работает из App?- спросить у куратора
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import { useContext } from "react";
 
-
 function Main(props) {
- 
-  //const [cards, setCards] = React.useState([]);
   //подписываемся на контекст
   const userContext = useContext(CurrentUserContext);
-
- 
 
   return (
     <main>
@@ -57,8 +52,8 @@ function Main(props) {
               onCardClick={props.onCardClick}
               card={item}
               hendler={props.hendler}
-              onCardLike = {props.onCardLike}
-              onCardDelete = {props.onCardDelete}
+              onCardLike={props.onCardLike}
+              onCardDelete={props.onCardDelete}
             />
           ))}
         </ul>
