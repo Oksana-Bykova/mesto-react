@@ -5,8 +5,8 @@ import { useContext } from "react";
 
 function EditProfilePopup(props) {
   //подписываемся на контекст
-  const [name, setName] = React.useState();
-  const [description, setDescription] = React.useState();
+  const [name, setName] = React.useState("");
+  const [description, setDescription] = React.useState("");
   const userContext = useContext(CurrentUserContext);
 
   React.useEffect(() => {
@@ -46,8 +46,9 @@ function EditProfilePopup(props) {
         minLength={2}
         maxLength={40}
         required=""
-        placeholder={name}
+        //placeholder={name}
         onChange={handleName}
+        value={name || ''}
       />
       <span className="popup__error" id="name-error" />
       <input
@@ -58,8 +59,9 @@ function EditProfilePopup(props) {
         minLength={2}
         maxLength={200}
         required=""
-        placeholder={description}
+        //placeholder={description}
         onChange={handleDescription}
+        value={description || ''}
       />
       <span className="popup__error" id="hobby-error" />
     </PopupWithForm>

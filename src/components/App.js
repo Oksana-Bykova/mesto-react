@@ -49,20 +49,23 @@ function App() {
   }
 
   React.useEffect(() => {
-    api
-      .getProfileInformation()
+    Promise.all([
+      api
+      .getProfileInformation(),
+      api
+      .getInitialCards()
+    ])
+    
       .then((data) => {
-        setCurrentUser(data);
+        setCurrentUser(data[0]);
+        setCards(data[1]);
       })
       .catch((err) => console.log(err));
 
-    api
-      .getInitialCards()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  
+  }, [cards]);
+
+    
 
   //лайки для карточки
   function handleCardLike(card) {
@@ -70,14 +73,17 @@ function App() {
     const isLiked = card.likes.some((item) => item._id === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card._id, !isLiked).then((data) => {
+    api.changeLikeCardStatus(card._id, !isLiked)
+    .then((data) => {
       setCards((state) => state.map((c) => (c._id === card._id ? data : c)));
-    });
+    })
+    .catch((err) => console.log(err));
   }
 
   //удаление карточек
   function handleCardDelete(card) {
-    api.deleteCard(card._id).then((data) => {
+    api.deleteCard(card._id)
+    .then((data) => {
       setCards(
         data.filter(function () {
           if (data._id === card._id) {
@@ -87,7 +93,8 @@ function App() {
           }
         })
       );
-    });
+    })
+    .catch((err) => console.log(err));
   }
 
   //обработка формы редактирования профиля
@@ -96,9 +103,11 @@ function App() {
       .editProfile(data)
       .then((data) => {
         setCurrentUser(data);
+        closeAllPopups();
       })
+      
       .catch((err) => console.log(err));
-    closeAllPopups();
+    
   }
 
   //обработка формы изменения аватара
@@ -107,9 +116,10 @@ function App() {
       .editPhotoProfile(data)
       .then((data) => {
         setCurrentUser(data);
+        closeAllPopups();
       })
       .catch((err) => console.log(err));
-    closeAllPopups();
+    
   }
 
   //обработка формы добавления новой карточки
@@ -117,14 +127,15 @@ function App() {
     api
       .addCard(data)
       .then((data) => {
-        setCards([data, ...cards]);
+        setCards([...cards, data]);
+        closeAllPopups();
       })
       .catch((err) => console.log(err));
-    closeAllPopups();
+    
   }
 
+
   return (
-    <>
       <CurrentUserContext.Provider value={currentUser}>
         <div className="root">
           <div className="page">
@@ -169,7 +180,6 @@ function App() {
           />
         </div>
       </CurrentUserContext.Provider>
-    </>
   );
 }
 
