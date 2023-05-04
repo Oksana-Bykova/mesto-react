@@ -7,12 +7,12 @@ function EditProfilePopup(props) {
   //подписываемся на контекст
   const [name, setName] = React.useState("");
   const [description, setDescription] = React.useState("");
-  const userContext = useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
 
   React.useEffect(() => {
-    setName(userContext.name);
-    setDescription(userContext.about);
-  }, [userContext]);
+    setName(currentUser.name);
+    setDescription(currentUser.about);
+  }, [currentUser, props.isOpen]);
 
   function handleSubmit(evt) {
     evt.preventDefault();

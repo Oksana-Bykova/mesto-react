@@ -63,7 +63,7 @@ function App() {
       .catch((err) => console.log(err));
 
   
-  }, [cards]);
+  }, []);
 
     
 
@@ -84,16 +84,10 @@ function App() {
   function handleCardDelete(card) {
     api.deleteCard(card._id)
     .then((data) => {
-      setCards(
-        data.filter(function () {
-          if (data._id === card._id) {
-            return false;
-          } else {
-            return true;
-          }
-        })
-      );
+      const newCards = cards.filter((c) => c._id !== card._id);
+      setCards(newCards);
     })
+    
     .catch((err) => console.log(err));
   }
 
@@ -127,7 +121,7 @@ function App() {
     api
       .addCard(data)
       .then((data) => {
-        setCards([...cards, data]);
+        setCards([data, ...cards]);
         closeAllPopups();
       })
       .catch((err) => console.log(err));
